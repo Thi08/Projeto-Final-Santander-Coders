@@ -1,0 +1,16 @@
+<header id="app-header">
+  <a routerLink="/" class="logo-title">
+    <img
+      ngSrc="https://w7.pngwing.com/pngs/317/460/png-transparent-physician-medicine-staff-of-hermes-symbol-symbol-miscellaneous-text-logo.png"
+      alt="Mr. Doctor" width="50" height="40" priority />
+    <h1>Mr. Doctor</h1>
+  </a>
+
+  <div class="header-links">
+    <a href="" aria-label="Appointments">Appointments</a>
+    <hr>
+    <a routerLink="/auth/register" aria-label="Register">Register</a>
+    <hr>
+    <a routerLink="/auth/login" aria-label="Login">{{ loggedUsername ? loggedUsername : 'Login'}}</a>
+  </div>
+</header>

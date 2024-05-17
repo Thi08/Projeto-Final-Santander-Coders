@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    @for (appointment of appointments; track appointment.date) {
+    <div class="col-3">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{ appointment.user }}</mat-card-title>
+        </mat-card-header>
+        />
+        <mat-card-content>
+          <p>
+            {{ appointment.description }}
+          </p>
+          <p>{{ appointment.date }}</p>
+          <p>{{ appointment.status }}</p>
+        </mat-card-content>
+        <mat-card-actions class="d-flex justify-content-end">
+          <button
+            mat-flat-button
+            color="primary"
+            (click)="editAppointment(appointment.id!)"
+          >
+            Editar
+          </button>
+          <button
+            mat-stroked-button
+            color="warn"
+            (click)="openDialog(appointment.id!)"
+          >
+            Cancelar
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    } @empty {
+    <div class="col-12 text-center">Nenhum produto cadastrado</div>
+    }
+  </div>
+</div>
