@@ -1,10 +1,9 @@
-<div class="container">
+<div class="col-8 container-fluid">
   <h1 class="mt-5">Cadastrar usuário</h1>
-
-  <form [formGroup]="form" (ngSubmit)="register()">
+  <form [formGroup]="form" (ngSubmit)="register()" class="container-fluid">
     <div class="row mb-3">
       <div class="col-12">
-        <mat-form-field appearance="outline">
+        <mat-form-field  class="col-12" appearance="outline">
           <mat-label>Nome</mat-label>
           <input matInput formControlName="name" />
           <mat-error>O campo Nome é obrigatório</mat-error>
@@ -13,43 +12,16 @@
     </div>
     <div class="row mb-3">
       <div class="col-12">
-        <mat-form-field appearance="outline">
-          <mat-label>Profissão</mat-label>
-          <input matInput formControlName="profession" />
-          <mat-error>O campo Profissão é obrigatório</mat-error>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-12">
-        <mat-form-field appearance="outline">
-          <mat-label>Data Nasc.</mat-label>
-          <input type="date" matInput formControlName="birthDate" />
-          <mat-error>O campo Data Nasc. é obrigatório</mat-error>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-12">
-        <mat-form-field appearance="outline">
-          <mat-label>CPF</mat-label>
-          <input matInput formControlName="documentNumber" />
-          <mat-error>O campo CPF é obrigatório</mat-error>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-12">
-        <mat-form-field appearance="outline">
+        <mat-form-field  class="col-12"  appearance="outline">
           <mat-label>E-mail</mat-label>
-          <input matInput formControlName="email" />
+          <input matInput formControlName="email"/>
           <mat-error>O campo E-mail é obrigatório</mat-error>
         </mat-form-field>
       </div>
     </div>
     <div class="row mb-3">
       <div class="col-12">
-        <mat-form-field appearance="outline">
+        <mat-form-field  class="col-12" appearance="outline">
           <mat-label>Senha</mat-label>
           <input type="password" matInput formControlName="password" />
           <mat-error>O campo Senha é obrigatório</mat-error>
@@ -58,22 +30,18 @@
     </div>
     <div class="row mb-3">
       <div class="col-12">
-        <mat-form-field appearance="outline">
-          <mat-label>Telefone</mat-label>
-          <input matInput formControlName="phone" />
-          <mat-error>O campo Telefone é obrigatório</mat-error>
+        <mat-form-field  class="col-12" appearance="outline">
+          <mat-label>Perfil</mat-label>
+          <mat-select formControlName="role">
+            <mat-option [value]="null"> -- </mat-option>
+            <mat-option value="ADMIN" > Administrador </mat-option>
+            <mat-option value="USER" > Usuário </mat-option>
+          </mat-select>
+          <mat-error>O campo Perfil é obrigatório</mat-error>
         </mat-form-field>
       </div>
     </div>
-    <div class="row mb-3">
-      <div class="col-12">
-        <mat-form-field appearance="outline">
-          <mat-label>Renda</mat-label>
-          <input matInput formControlName="income" />
-          <mat-error>O campo Renda é obrigatório</mat-error>
-        </mat-form-field>
-      </div>
-    </div>
+    <div class="row mb-3"></div>
 
     <div class="row mb-3">
       <div class="col-12">

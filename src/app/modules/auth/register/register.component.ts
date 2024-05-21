@@ -9,6 +9,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { Router } from '@angular/router';
+import { User } from '../models/user';
+import { AuthService } from '../services/auth.service';
+import { UserRole } from '../models/userRole.enum';
 
 @Component({
   selector: 'app-register',
@@ -18,12 +23,15 @@ import {
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
+    MatSelectModule,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
   form!: FormGroup;
+
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.buildForm();
@@ -33,8 +41,8 @@ export class RegisterComponent {
     this.form = new FormGroup({
       email: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required]),
-      phone: new FormControl(null, [Validators.required]),
-      income: new FormControl(null, [Validators.required]),
+      name: new FormControl(null, [Validators.required]),
+      role: new FormControl(null, [Validators.required]),
     });
   }
 
