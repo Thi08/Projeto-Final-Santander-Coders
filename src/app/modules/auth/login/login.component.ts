@@ -28,14 +28,26 @@ export class LoginComponent {
     this.buildForm();
   }
 
-  login(): void {
-    console.log('logado');
-  }
-
   buildForm(): void {
     this.form = new FormGroup({
       email: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required]),
     });
+  }
+
+  login(): void {
+    const user: UserCredentials = this.form.getRawValue();
+    this.authService
+      .login(user.email, user.password)
+      .pipe(first())
+      .subscribe({
+        next: (res) => {
+          localStorage.setItem(Constants.TOKEN_KEY, `Beares ${res.token}`);
+          this.router.navigate(['']);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 }
