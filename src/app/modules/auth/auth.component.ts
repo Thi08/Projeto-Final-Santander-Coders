@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from '../appointments/components/header/header.component';
-import { FooterComponent } from '../appointments/components/footer/footer.component';
+import { HeaderComponent } from '../shared/header/header.component';
+import { FooterComponent } from '../shared/footer/footer.component';
 
 @Component({
   selector: 'app-auth',

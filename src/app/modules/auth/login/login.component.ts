@@ -8,6 +8,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { UserCredentials } from '../models/userCredentials';
+import { first } from 'rxjs';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { Constants } from '../constants/constants.enum';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +29,8 @@ import {
 export class LoginComponent {
   form!: FormGroup;
 
+  constructor(private router: Router, private authService: AuthService) {}
+
   ngOnInit(): void {
     this.buildForm();
   }
@@ -38,7 +45,7 @@ export class LoginComponent {
   login(): void {
     const user: UserCredentials = this.form.getRawValue();
     this.authService
-      .login(user.email, user.password)
+      .login(user)
       .pipe(first())
       .subscribe({
         next: (res) => {
