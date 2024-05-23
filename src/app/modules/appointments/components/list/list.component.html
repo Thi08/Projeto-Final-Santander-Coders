@@ -1,38 +1,48 @@
-<div class="container">
-  <div class="row">
+<div class="container-fluid col-12 content" style="margin: 10px 0 10px 0; width: 100%">
+  <div style="text-align: center">
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="['/appointments', 'create']"
+    >
+      Add new Appointament<mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div class="cards">
     @for (appointment of appointments; track appointment.date) {
-    <div class="col-3">
-      <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>{{ appointment.user }}</mat-card-title>
-        </mat-card-header>
-        />
-        <mat-card-content>
-          <p>
-            {{ appointment.description }}
-          </p>
-          <p>{{ appointment.date }}</p>
-          <p>{{ appointment.status }}</p>
-        </mat-card-content>
-        <mat-card-actions class="d-flex justify-content-end">
-          <button
-            mat-flat-button
-            color="primary"
-            (click)="editAppointment(appointment.id!)"
-          >
-            Editar
-          </button>
-          <button
-            mat-stroked-button
-            color="warn"
-            (click)="openDialog(appointment.id!)"
-          >
-            Cancelar
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+    <mat-card class="card col-3">
+      <mat-card-header>
+        <mat-card-title>{{ appointment.specialty }}</mat-card-title>
+        <mat-card-subtitle>{{ appointment.doctor }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          {{ appointment.obs }}
+        </p>
+        <p>{{ appointment.date | date : "dd/MM/YYY" }}</p>
+        <p>{{ appointment.time }}</p>
+        <p>{{ appointment.status }}</p>
+      </mat-card-content>
+      @if (appointment.status=='SCHEDULED') {
+      <mat-card-actions class="card-actions">
+        <button
+          mat-flat-button
+          color="primary"
+          (click)="editAppointment(appointment.id!)"
+        >
+          Editar
+        </button>
+        <button
+          mat-stroked-button
+          color="warn"
+          (click)="showCancelConfirmationMessage(appointment)"
+        >
+          Cancelar
+        </button>
+      </mat-card-actions>
+      }
+    </mat-card>
     } @empty {
     <div class="col-12 text-center">Nenhum produto cadastrado</div>
     }

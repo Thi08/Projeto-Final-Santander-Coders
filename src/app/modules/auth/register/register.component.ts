@@ -13,7 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { User } from '../models/user';
 import { AuthService } from '../services/auth.service';
-import { UserRole } from '../models/userRole.enum';
+import { UserRoles } from '../constants/user-roles.enum'; 
 
 @Component({
   selector: 'app-register',

@@ -1,0 +1,17 @@
+.cards {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  
+  .card {
+    margin: 5px 5px;
+    flex: 1;
+
+    .card-actions {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}

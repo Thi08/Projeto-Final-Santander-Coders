@@ -1,7 +1,12 @@
-export interface Appointments {
-  id?: string;
-  user: string;
-  description: string;
+import { Time } from '@angular/common';
+import { AppointmentStatus } from '../constants/status.enum';
+
+export interface Appointment {
+  id: string;
+  specialty: string;
+  doctor: string;
   date: Date;
-  status: string;
+  time: Time;
+  obs: string;
+  status: AppointmentStatus;
 }

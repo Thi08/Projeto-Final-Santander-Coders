@@ -12,7 +12,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AppointmentsService } from '../../services/appointments.service';
 
 @Component({
-  selector: 'app-create',
+  selector: 'app-edit',
   standalone: true,
   imports: [
     RouterModule,
@@ -21,16 +21,17 @@ import { AppointmentsService } from '../../services/appointments.service';
     MatInputModule,
     MatButtonModule,
   ],
-  templateUrl: './create.component.html',
-  styleUrl: './create.component.scss',
+  templateUrl: './edit.component.html',
+  styleUrl: './edit.component.scss',
 })
-export class CreateComponent {
+export class EditComponent {
   form!: FormGroup;
 
   id?: string;
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private appointmentService: AppointmentsService
   ) {}
 
@@ -46,18 +47,5 @@ export class CreateComponent {
       time: new FormControl(null, [Validators.required]),
       obs: new FormControl(null, [Validators.required]),
     });
-  }
-
-  createAppointment() {
-    this.appointmentService
-      .createAppointment(this.form.getRawValue())
-      .subscribe({
-        next: (result) => {
-          this.router.navigate(['appointments', 'list']);
-        },
-        error: (err) => {
-          alert(err);
-        },
-      });
   }
 }

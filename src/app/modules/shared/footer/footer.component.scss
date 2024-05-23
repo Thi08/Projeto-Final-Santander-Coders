@@ -17,6 +17,8 @@ footer {
 
 .footer-column {
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .footer-column h3 {

@@ -1,8 +1,8 @@
-import { UserRole } from "./userRole.enum";
+import { UserRoles } from "../constants/user-roles.enum";
 
 export interface User {
   email: string;
   name: string;
   password:string;
-  role: UserRole;
+  role: UserRoles;
 }
