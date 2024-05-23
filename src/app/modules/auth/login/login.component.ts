@@ -10,9 +10,10 @@ import {
 } from '@angular/forms';
 import { UserCredentials } from '../models/userCredentials';
 import { first } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { Constants } from '../constants/constants.enum';
+import { UserRoles } from '../constants/user-roles.enum';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ import { Constants } from '../constants/constants.enum';
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
+    RouterLink,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -50,6 +52,7 @@ export class LoginComponent {
       .subscribe({
         next: (res) => {
           localStorage.setItem(Constants.TOKEN_KEY, `Beares ${res.token}`);
+          localStorage.setItem(Constants.USER_ROLES, UserRoles.USER);
           this.router.navigate(['']);
         },
         error: (err) => {
