@@ -41,7 +41,7 @@ export const routes: Routes = [
         data: {roles: [UserRoles.ADMIN]}
       },
       {
-        path: 'edit',
+        path: 'edit/:id',
         component: EditComponent,
         canActivate: [rolesGuard],
         data: {roles: [UserRoles.ADMIN]}

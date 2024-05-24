@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { LoginResponse } from '../models/loginResponse';
 import { Constants } from '../constants/constants.enum';
 import { UserRoles } from '../constants/user-roles.enum';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +15,10 @@ import { UserRoles } from '../constants/user-roles.enum';
 export class AuthService {
   readonly url = `${environment.apiUrl}/auth`; 
   isLogged = new BehaviorSubject<boolean>(false);
+  private loggedUsername = new BehaviorSubject<string>('')
+  loggedUsername$ = this.loggedUsername.asObservable();
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   login(credentials: UserCredentials): Observable<LoginResponse> {
     return this.httpClient.post<LoginResponse>(
@@ -41,5 +44,15 @@ export class AuthService {
     return new Observable<UserRoles>((observer) => {
       observer.next(userRole);
     });
+  }
+
+  getLoggedUsername(username: string){
+    this.loggedUsername.next(username)
+  }
+
+  logout(): void {
+    localStorage.removeItem(Constants.TOKEN_KEY);
+    localStorage.removeItem(Constants.USER_ROLES);
+    this.router.navigate(['auth', 'login'])
   }
 }

@@ -8,8 +8,11 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AppointmentsService } from '../../services/appointments.service';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import {provideNativeDateAdapter} from '@angular/material/core';
 
 @Component({
   selector: 'app-create',
@@ -20,6 +23,11 @@ import { AppointmentsService } from '../../services/appointments.service';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatDatepickerModule,
+  ],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    provideNativeDateAdapter(),
   ],
   templateUrl: './create.component.html',
   styleUrl: './create.component.scss',
@@ -42,7 +50,7 @@ export class CreateComponent {
     this.form = new FormGroup({
       specialty: new FormControl(null, [Validators.required]),
       doctor: new FormControl(null, [Validators.required]),
-      date: new FormControl(null, [Validators.required]),
+      date: new FormControl(new Date(), [Validators.required]),
       time: new FormControl(null, [Validators.required]),
       obs: new FormControl(null, [Validators.required]),
     });

@@ -1,26 +1,38 @@
-<div class="container-fluid col-12 content" style="margin: 10px 0 10px 0; width: 100%">
+<div
+  class="container-fluid col-12 content"
+  style="margin: 10px 0 10px 0; width: 100%"
+>
   <div style="text-align: center">
     <button
       mat-raised-button
       color="primary"
       [routerLink]="['/appointments', 'create']"
     >
-      Add new Appointament<mat-icon>add</mat-icon>
+      Add new Appointment<mat-icon>add</mat-icon>
     </button>
   </div>
 
   <div class="cards">
     @for (appointment of appointments; track appointment.date) {
-    <mat-card class="card col-3">
+    <mat-card class="card">
       <mat-card-header>
         <mat-card-title>{{ appointment.specialty }}</mat-card-title>
         <mat-card-subtitle>{{ appointment.doctor }}</mat-card-subtitle>
+        @if(userRole == 'ADMIN'){
+        <button
+          mat-stroked-button
+          color="warn"
+          (click)="deleteAppointment(appointment.id!)"
+        >
+          Excluir
+        </button>
+        }
       </mat-card-header>
       <mat-card-content>
         <p>
           {{ appointment.obs }}
         </p>
-        <p>{{ appointment.date | date : "dd/MM/YYY" }}</p>
+        <p>{{ appointment.date | date : "dd/MM/yyyy" }}</p>
         <p>{{ appointment.time }}</p>
         <p>{{ appointment.status }}</p>
       </mat-card-content>
@@ -32,6 +44,13 @@
           (click)="editAppointment(appointment.id!)"
         >
           Editar
+        </button>
+        <button
+          mat-button
+          class="success-button"
+          (click)="completeAppointment(appointment.id!)"
+        >
+          Completar
         </button>
         <button
           mat-stroked-button

@@ -6,6 +6,8 @@ import { Appointment } from '../../models/appointments.model';
 import { Router, RouterModule } from '@angular/router';
 import { AppointmentsService } from '../../services/appointments.service';
 import { DatePipe } from '@angular/common';
+import { AuthService } from '../../../auth/services/auth.service';
+import { UserRoles } from '../../../auth/constants/user-roles.enum';
 
 @Component({
   selector: 'app-list',
@@ -18,27 +20,44 @@ import { DatePipe } from '@angular/common';
     RouterModule,
   ],
   templateUrl: './list.component.html',
-  styleUrl: './list.component.scss',
+  styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
   appointments?: Appointment[];
+  userRole?: UserRoles;
 
   constructor(
     private router: Router,
-    private appointmentService: AppointmentsService
+    private appointmentService: AppointmentsService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.getAllApointments();
+    this.getAllAppointments();
+    this.getRoleUser();
   }
 
-  getAllApointments() {
+  getAllAppointments() {
     this.appointmentService.getAllAppointments().subscribe({
       next: (result) => {
         this.appointments = result;
         console.log(result);
       },
-      error: (err) => {},
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
+  getRoleUser() {
+    this.authService.checkUserRoles().subscribe({
+      next: (userRole) => {
+        this.userRole = userRole;
+        console.log('User Role:', this.userRole);
+      },
+      error: (err) => {
+        console.error(err);
+      },
     });
   }
 
@@ -52,8 +71,9 @@ export class ListComponent implements OnInit {
           appointment.time
         }`
       )
-    )
+    ) {
       this.cancelAppointment(appointment.id);
+    }
   }
 
   editAppointment(id: string): void {
@@ -62,8 +82,33 @@ export class ListComponent implements OnInit {
 
   cancelAppointment(id: string) {
     this.appointmentService.cancelAppointment(id).subscribe({
-      next: (result) => {
-        this.getAllApointments();
+      next: () => {
+        this.getAllAppointments();
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
+  deleteAppointment(id: string) {
+    this.appointmentService.deleteAppointment(id).subscribe({
+      next: () => {
+        this.getAllAppointments();
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
+  completeAppointment(id: string): void {
+    this.appointmentService.completeAppointment(id).subscribe({
+      next: () => {
+        this.getAllAppointments();
+      },
+      error: (err) => {
+        console.error(err);
       },
     });
   }
